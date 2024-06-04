@@ -43,7 +43,7 @@ function Sidebar() {
                         </div>
                         <div className="flex gap-3  items-center justify-start">
                             <FaEye />
-                            <Link href={""}>View</Link>
+                            <Link href="/Pages/view">View</Link>
                         </div>
                         <div className="flex gap-3  items-center justify-start">
                             <FaMoneyCheck />
