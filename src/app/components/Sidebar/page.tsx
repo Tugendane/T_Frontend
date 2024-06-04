@@ -39,11 +39,11 @@ function Sidebar() {
                     <div className="flex flex-col gap-6">
                         <div className="flex gap-3  items-center justify-start">
                             <FaHouseUser />
-                            <Link href={""}>Dashboard</Link>
+                            <Link href="/Pages/Dashboard">Dashboard</Link>
                         </div>
                         <div className="flex gap-3  items-center justify-start">
                             <FaEye />
-                            <Link href={""}>View</Link>
+                            <Link href="/Pages/view">View</Link>
                         </div>
                         <div className="flex gap-3  items-center justify-start">
                             <FaMoneyCheck />

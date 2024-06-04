@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Button } from '@nextui-org/react';
+import Link from 'next/link';
 
 const Mituweli = () => {
   return (
@@ -94,7 +95,7 @@ const Mituweli = () => {
           </div>
         </div>
         <div>
-          <Button className='bg-[#5C8F4A] bottom-0 text-white px-8 py-3 rounded-sm'>Save</Button>
+          <Button className='bg-[#5C8F4A] bottom-0 text-white px-8 py-3 rounded-sm mt-10 ml-24'><Link href="/facial-test">Save</Link></Button>
         </div>
       </div>
     </div>
