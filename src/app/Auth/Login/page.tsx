@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { toast } from "react-toastify";
+// ReactModal.setAppElement("#__next");
 
 function Login() {
     const router = useRouter();
@@ -49,7 +50,7 @@ function Login() {
         key: string
     ) => {
         console.log(e.target.name);
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [key]: e.target.value });
     };
 
     const handleBigDataChange = (
@@ -75,8 +76,9 @@ function Login() {
                 }
             );
             console.log(response.data);
+            console.log(response.status);
             toast.success("Logged in successfully");
-            router.push("/Pages/Dashboard/newuser");
+            // router.push("/Pages/Dashboard/newuser");
         } catch (error) {
             console.error("Error:", error);
             toast.error("Failed to log in, please try again");
@@ -95,13 +97,13 @@ function Login() {
                 {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json",
+                        "Content-Typee": "application/json",
                     },
                 }
             );
-            console.log(response.data);
+            console.log(response.status.toFixed(2));
             toast.success("Account created successfully");
-            router.push("/Pages/signIn");
+            router.push("/Pages/Dashboard/newuser");
         } catch (error) {
             console.error("Error:", error);
             toast.error("Failed to create account, please try again");
@@ -259,33 +261,32 @@ function Login() {
                         <input
                             type="text"
                             placeholder="firstname"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3"
                         />
                         <input
                             type="text"
                             placeholder="lastname"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3 "
                         />
                         <input
                             type="text"
                             placeholder="email"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3 "
                         />
                         <input
                             type="text"
-                            placeholder="pasword"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            placeholder="password"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3 "
                         />
                         <input
                             type="text"
-                            placeholder="phonrnumber"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            placeholder="phonenumber"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3 "
                         />
                         <input
                             type="text"
-                            placeholder="hospitalname
-                            "
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            placeholder="hospitalname"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-3 "
                         />
                     </div>
 
@@ -302,11 +303,13 @@ function Login() {
                             <span>Requesting an account</span>
                         </div>
                         <div>
-                            <Link href="/Pages/Dashboard/newuser">
-                                <button className="bg-dark-blue font-bold text-white px-4 py-2 rounded-md flex items-center justify-center ">
+                            {/* <Link href="/Pages/Dashboard/newuser"> */}
+                            <button
+                                onClick={handleSignUp}
+                                className="bg-dark-blue font-bold text-white px-4 py-2 rounded-md flex items-center justify-center ">
                                     send
                                 </button>
-                            </Link>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </div>
