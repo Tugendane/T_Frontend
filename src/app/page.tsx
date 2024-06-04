@@ -50,7 +50,7 @@ export default function Home() {
             </div>
           </div>
           <div className="">
-          <Link href="/components/Login">  <div className="flex cursor-pointer hover:scale-110 items-center transition-all duration-300 group absolute ml-[-3rem]">
+          <Link href="/Auth/Login">  <div className="flex cursor-pointer hover:scale-110 items-center transition-all duration-300 group absolute ml-[-3rem]">
               <Icons.login className="text-white/80 group-hover:text-deep-blue" />
               <p className="invisible group-hover:visible text-deep-blue">
                 Login
