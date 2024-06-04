@@ -4,9 +4,8 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/charts/styles.css";
 import "@mantine/core/styles.css";
 
-import Sidebar from "../components/Sidebar/page"
+import Sidebar from "../components/Sidebar/page";
 import "../globals.css";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,16 +21,11 @@ export default function RootLayout({
 }>) {
     return (
         <MantineProvider>
-            <html lang="en">
-                <body className="flex gap-5 bg-back-default h-full">
-                    
-                    <Sidebar />
-                
-                    <main className="w-full h-full">
-                        {children}
-                    </main>
-                </body>
-            </html>
+            <main className="flex gap-5 bg-back-default h-full">
+                <Sidebar />
+
+                <main className="w-full h-full">{children}</main>
+            </main>
         </MantineProvider>
     );
 }
