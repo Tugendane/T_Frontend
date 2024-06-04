@@ -1,15 +1,18 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
 import ReactModal from "react-modal";
 import { FaWindows } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 function Login() {
+    const router = useRouter();
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         (e.currentTarget.parentNode as Element).classList.add("focus");
     };
@@ -17,12 +20,94 @@ function Login() {
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         (e.currentTarget.parentNode as Element).classList.remove("focus");
     };
+
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const handleButtonClick = () => {
         setIsModalOpen(true);
     };
     const handleCloseModal = () => {
         setIsModalOpen(false);
+    };
+
+    const [bigData, setBigData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+        hospitalName: "",
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        key: string
+    ) => {
+        console.log(e.target.name);
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleBigDataChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        key: string
+    ) => {
+        console.log(e.target.name);
+        setBigData({ ...bigData, [key]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                "https://tugendane-backend.onrender.com/auth/authenticate",
+                formData,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log(response.data);
+            toast.success("Logged in successfully");
+            router.push("/Pages/Dashboard/newuser");
+        } catch (error) {
+            console.error("Error:", error);
+            toast.error("Failed to log in, please try again");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSignUp = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                "https://tugendane-backend.onrender.com/auth/agent/register",
+                bigData,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log(response.data);
+            toast.success("Account created successfully");
+            router.push("/Pages/signIn");
+        } catch (error) {
+            console.error("Error:", error);
+            toast.error("Failed to create account, please try again");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -58,7 +143,10 @@ function Login() {
                     <div>or login with your email</div>
                     <div className="border-t border-solid border-black w-20"></div>
                 </div>
-                <div className="p-5 flex flex-col w-[40%] gap-6">
+                <div
+                    className="p-5 flex flex-col w-[40%] gap-6"
+                    onSubmit={handleSubmit}
+                >
                     {/* <div className="py-3 px-5 border border-gray-500 rounded-full relative">
                         <input
                             type="text"
@@ -77,12 +165,14 @@ function Login() {
                             onBlur={handleBlur}
                         />
                     </div> */}
-                    <div className="py-3 px-5 border border-gray-500 rounded-full relative">
+                    <div className="py-3 px-5 border border-gray-500 rounded-full relative flex flex-col">
                         <input
                             type="text"
+                            value={formData.email}
                             placeholder="Authorised username"
                             className="w-full outline-none border-none"
                             onFocus={handleFocus}
+                            onChange={(e) => handleChange(e, "email")}
                             onBlur={handleBlur}
                         />
                     </div>
@@ -90,8 +180,10 @@ function Login() {
                         <input
                             type="password"
                             placeholder="Password"
+                            value={formData.password}
                             className="w-full outline-none border-none"
                             onFocus={handleFocus}
+                            onChange={(e) => handleChange(e, "password")}
                             onBlur={handleBlur}
                         />
                     </div>
@@ -110,12 +202,14 @@ function Login() {
                         </div>
                     </a>
                 </div>
-                
+
                 <div className="flex items-center justify-center rounded-full border bg-blue-500 w-[35%] py-2 text-white mt-4">
-                <Link href="http://localhost:3000/Pages/Dashboard/newuser"> login </Link>    
+                    <Link href="http://localhost:3000/Pages/Dashboard/newuser">
+                        {" "}
+                        login{" "}
+                    </Link>
                 </div>
-                
-                
+
                 <div className="mt-4">
                     <p>
                         Don&apos;t have an account?
@@ -148,8 +242,11 @@ function Login() {
                 onRequestClose={handleCloseModal}
                 className="lg:w-[600px]  p-10 mt-20 bg-white shadow-lg lg:ml-[500px] "
             >
-                <div className="p-4 bg-white rounded-md flex flex-col gap-4">
-                    <div className="flex justify-between items-center gap-3">
+                <div
+                    className="p-4 bg-white rounded-md flex flex-col gap-4"
+                    onSubmit={handleSignUp}
+                >
+                    <div className="flex justify-between items-center ">
                         <div>
                             <span> Contact us</span>
                         </div>
@@ -161,18 +258,72 @@ function Login() {
                             />
                         </div>
                     </div>
-                    <div className="flex">
-                        <input
-                            type="text"
-                            placeholder="Fullname"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Email"
-                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
-                        />
+                    <div className="flex gap-4">
+                        <div className="flex flex-col gap-3">
+                            <input
+                                type="text"
+                                placeholder="Firstname"
+                                value={bigData.firstname}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "firstname")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            />
+                            <input
+                                type="text"
+                                placeholder="lastname"
+                                value={bigData.lastname}
+                                // onChange={handleBigDataChange}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "lastname")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            />
+                            <input
+                                type="text"
+                                placeholder="phone"
+                                value={bigData.phoneNumber}
+                                // onChange={handleBigDataChange}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "phoneNumber")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            />
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <input
+                                type="text"
+                                placeholder="Email"
+                                value={bigData.email}
+                                // onChange={handleBigDataChange}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "email")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                            />
+                            <input
+                                type="password"
+                                placeholder="password"
+                                value={bigData.password}
+                                // onChange={handleBigDataChange}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "password")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            />
+                            <input
+                                type="text"
+                                placeholder="hospitalname"
+                                value={bigData.hospitalName}
+                                // onChange={handleBigDataChange}
+                                onChange={(e) =>
+                                    handleBigDataChange(e, "hospitalName")
+                                }
+                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                            />
+                        </div>
                     </div>
+
                     <div className=" ">
                         <textarea
                             className="w-1600 h-1600 border border-gray-400 rounded-2xl p-2  "
@@ -185,9 +336,11 @@ function Login() {
                             <span>Requesting an account</span>
                         </div>
                         <div>
-                            <button className="bg-dark-blue font-bold text-white px-4 py-2 rounded-md flex items-center justify-center ">
-                                send
-                            </button>
+                            <Link href="/Pages/Dashboard/newuser">
+                                <button className="bg-dark-blue font-bold text-white px-4 py-2 rounded-md flex items-center justify-center ">
+                                    send
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
