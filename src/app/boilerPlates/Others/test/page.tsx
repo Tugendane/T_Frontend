@@ -1,7 +1,8 @@
 "use client"
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 
-const Page = () => {
+const TLoader = () => {
   useEffect(() => {
     const handleLoad = () => {
       const loader = document.querySelector('.loader');
@@ -79,10 +80,10 @@ const Page = () => {
         
       `}</style>
       <div className='loader'>
-        <p>Tugendane</p>
+        <p><Image src="/images/logo.png" alt='logo' width={80} height={80}></Image></p>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default TLoader;

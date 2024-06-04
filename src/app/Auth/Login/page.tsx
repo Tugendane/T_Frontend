@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import ReactModal from "react-modal";
 import { FaWindows } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 function Login() {
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -57,7 +59,7 @@ function Login() {
                     <div className="border-t border-solid border-black w-20"></div>
                 </div>
                 <div className="p-5 flex flex-col w-[40%] gap-6">
-                    <div className="py-3 px-5 border border-gray-500 rounded-full relative">
+                    {/* <div className="py-3 px-5 border border-gray-500 rounded-full relative">
                         <input
                             type="text"
                             placeholder="Organisation Name"
@@ -74,7 +76,7 @@ function Login() {
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                         />
-                    </div>
+                    </div> */}
                     <div className="py-3 px-5 border border-gray-500 rounded-full relative">
                         <input
                             type="text"
@@ -108,9 +110,12 @@ function Login() {
                         </div>
                     </a>
                 </div>
+                
                 <div className="flex items-center justify-center rounded-full border bg-blue-500 w-[35%] py-2 text-white mt-4">
-                    login
+                <Link href="http://localhost:3000/Pages/Dashboard/newuser"> login </Link>    
                 </div>
+                
+                
                 <div className="mt-4">
                     <p>
                         Don&apos;t have an account?
