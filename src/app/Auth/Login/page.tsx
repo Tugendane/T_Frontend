@@ -204,10 +204,7 @@ function Login() {
                 </div>
 
                 <div className="flex items-center justify-center rounded-full border bg-blue-500 w-[35%] py-2 text-white mt-4">
-                    <Link href="http://localhost:3000/Pages/Dashboard/newuser">
-                        {" "}
-                        login{" "}
-                    </Link>
+                <Link href="http://localhost:3000/Pages/Dashboard"> login </Link>    
                 </div>
 
                 <div className="mt-4">
@@ -258,77 +255,46 @@ function Login() {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-4">
-                        <div className="flex flex-col gap-3">
-                            <input
-                                type="text"
-                                placeholder="Firstname"
-                                value={bigData.firstname}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "firstname")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                            />
-                            <input
-                                type="text"
-                                placeholder="lastname"
-                                value={bigData.lastname}
-                                // onChange={handleBigDataChange}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "lastname")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                            />
-                            <input
-                                type="text"
-                                placeholder="phone"
-                                value={bigData.phoneNumber}
-                                // onChange={handleBigDataChange}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "phoneNumber")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-3">
-                            <input
-                                type="text"
-                                placeholder="Email"
-                                value={bigData.email}
-                                // onChange={handleBigDataChange}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "email")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
-                            />
-                            <input
-                                type="password"
-                                placeholder="password"
-                                value={bigData.password}
-                                // onChange={handleBigDataChange}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "password")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                            />
-                            <input
-                                type="text"
-                                placeholder="hospitalname"
-                                value={bigData.hospitalName}
-                                // onChange={handleBigDataChange}
-                                onChange={(e) =>
-                                    handleBigDataChange(e, "hospitalName")
-                                }
-                                className="bg-transparent  border border-gray-400 rounded-2xl p-2"
-                            />
-                        </div>
+                    <div className="flex flex-col gap-3">
+                        <input
+                            type="text"
+                            placeholder="firstname"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2"
+                        />
+                        <input
+                            type="text"
+                            placeholder="lastname"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                        />
+                        <input
+                            type="text"
+                            placeholder="email"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                        />
+                        <input
+                            type="text"
+                            placeholder="pasword"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                        />
+                        <input
+                            type="text"
+                            placeholder="phonrnumber"
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                        />
+                        <input
+                            type="text"
+                            placeholder="hospitalname
+                            "
+                            className="bg-transparent  border border-gray-400 rounded-2xl p-2 "
+                        />
                     </div>
 
                     <div className=" ">
-                        <textarea
+                        {/* <textarea
                             className="w-1600 h-1600 border border-gray-400 rounded-2xl p-2  "
                             placeholder="Message"
-                        ></textarea>
+                        ></textarea> */}
+
                     </div>
                     <div className="flex justify-between items-center">
                         <div className="flex gap-3">
